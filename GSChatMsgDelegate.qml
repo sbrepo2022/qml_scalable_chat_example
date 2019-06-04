@@ -1,6 +1,10 @@
 import QtQuick 2.0
 
 Item {
+    GSChatStyle {
+        id: gsStyle
+    }
+
     id: topItem
     property int style
     property string sender
@@ -12,6 +16,7 @@ Item {
         width: parent.width
         Text {
             text: topItem.sender
+            x: gsStyle.padding
         }
         Item {
             id: contentItem

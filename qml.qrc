@@ -4,5 +4,6 @@
         <file>GSChatWidget.qml</file>
         <file>GSChatMsgDelegate.qml</file>
         <file>GSChatMessage.qml</file>
+        <file>GSChatStyle.qml</file>
     </qresource>
 </RCC>
