@@ -18,8 +18,8 @@ Item {
             l_time: "16:18"
         }
         ListElement {
-            l_style: 1
-            l_sender: "Shibandr"
+            l_style: 0
+            l_sender: "Sergey"
             l_message: "Hello world!"
             l_time: "16:18"
         }
@@ -30,29 +30,31 @@ Item {
             l_time: "16:18"
         }
         ListElement {
-            l_style: 1
-            l_sender: "Shibandr"
+            l_style: 0
+            l_sender: "Sergey"
             l_message: "Sample"
             l_time: "16:18"
         }
     }
+    ScrollView {
+        anchors.fill: parent
+        ListView {
+            id: msgView
+            model: msgModel
+            delegate: GSChatMsgDelegate {
+                style: l_style
+                sender: l_sender
+                message: l_message
+                time: l_time
+                width: parent.width
+            }
 
-    ListView {
-        id: msgView
-        model: msgModel
-        delegate: GSChatMsgDelegate {
-            style: l_style
-            sender: l_sender
-            message: l_message
-            time: l_time
-            width: parent.width
+            anchors.top: parent.top
+            anchors.bottom: parent.bottom
+            anchors.left: parent.left
+            anchors.right: parent.right
+            anchors.margins: gsStyle.padding
+            spacing: gsStyle.padding * 2
         }
-
-        anchors.top: topItem.top
-        anchors.bottom: topItem.bottom
-        anchors.left: topItem.left
-        anchors.right: topItem.right
-        anchors.margins: gsStyle.padding
-        spacing: gsStyle.padding * 2
     }
 }

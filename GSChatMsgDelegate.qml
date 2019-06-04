@@ -16,33 +16,18 @@ Item {
         width: parent.width
         Text {
             text: topItem.sender
-            x: gsStyle.padding
+            anchors.left: topItem.style ? parent.left : undefined
+            anchors.leftMargin: topItem.style ? gsStyle.padding : 0
+            anchors.right : topItem.style ? undefined : parent.right
+            anchors.rightMargin: topItem.style ? 0 : gsStyle.padding
         }
-        Item {
-            id: contentItem
+        GSChatMessage {
+            id: chatMsg
             width: parent.width
-            height: childrenRect.height
-
-            GSChatMessage {
-                id: chatMsg
-                anchors.left: parent.left
-                anchors.top: parent.top
-                anchors.right: timeItem.left
-                maxWidth: contentItem.width - timeItem.width
-                message: topItem.message
-            }
-            Item {
-                id: timeItem
-                anchors.top: parent.top
-                anchors.right: parent.right
-                height: timeText.height
-                width: timeText.width
-
-                Text {
-                    id: timeText
-                    text: topItem.time
-                }
-            }
+            maxWidth: parent.width
+            message: topItem.message
+            time: topItem.time
+            msgAlign: topItem.style
         }
     }
 }

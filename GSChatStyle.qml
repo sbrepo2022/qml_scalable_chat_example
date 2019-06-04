@@ -8,9 +8,8 @@ Item {
 
     property double padding: mp(4)
     property double radius: mp(4)
-    property color color1: "green"
-    property color color2: "red"
-    property color color3: "blue"
-    property color textColor1: "black"
-    property color textColor2: "white"
+    property color msgColor1: "#ddd"
+    property color msgColor2: "green"
+    property color msgTextColor1: "black"
+    property color msgTextColor2: "white"
 }
