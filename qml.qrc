@@ -1,5 +1,8 @@
 <RCC>
     <qresource prefix="/">
         <file>main.qml</file>
+        <file>GSChatWidget.qml</file>
+        <file>GSChatMsgDelegate.qml</file>
+        <file>GSChatMessage.qml</file>
     </qresource>
 </RCC>
