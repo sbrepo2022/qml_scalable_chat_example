@@ -5,45 +5,59 @@ import QtGraphicalEffects 1.12
 
 Item {
     property GSChatStyle gsStyle: GSChatStyle {}
+    signal sendMessage(string text);
 
     id: topItem
+
+    property int notSendMsg: 0
+    function addNotSendedMessage(message) { // добавить сообщение в качестве неотправленных
+        msgModel.append({"l_msgAlign": false, "l_hideSender": true, "l_sender": "", "l_message": message, "l_time": "16:18"}); // устонавливать текущее время
+        notSendMsg += 1;
+    }
 
     ListModel {
         id: msgModel
         ListElement {
-            l_msgAlign: 1
-            l_hideSender: 0
+            l_msgAlign: true
+            l_hideSender: false
             l_sender: "GEOSAS inc."
             l_message: "Welcome to GEOSAS chat!"
             l_time: "16:18"
         }
         ListElement {
-            l_msgAlign: 0
-            l_hideSender: 0
+            l_msgAlign: false
+            l_hideSender: false
             l_sender: "Sergey"
             l_message: "Hello world!"
             l_time: "16:18"
         }
         ListElement {
-            l_msgAlign: 1
-            l_hideSender: 0
+            l_msgAlign: true
+            l_hideSender: false
             l_sender: "GEOSAS inc."
             l_message: "Welcome to GEOSAS chat! There is some long text? Yes, there is some long text!"
             l_time: "16:18"
         }
         ListElement {
-            l_msgAlign: 0
-            l_hideSender: 0
+            l_msgAlign: false
+            l_hideSender: false
             l_sender: "Sergey"
             l_message: "Sample"
             l_time: "16:18"
         }
 
         ListElement {
-            l_msgAlign: 0
-            l_hideSender: 1
+            l_msgAlign: false
+            l_hideSender: true
             l_sender: "Sergey"
             l_message: "Site Qt: <a href=\"http://qt-project.org\">Qt Project website</a>"
+            l_time: "16:18"
+        }
+        ListElement {
+            l_msgAlign: true
+            l_hideSender: false
+            l_sender: "Бизнес-тренер ИВАН"
+            l_message: "Трейдинг доступен каждому!"
             l_time: "16:18"
         }
     }
@@ -102,6 +116,7 @@ Item {
         onStatusChanged: {
             if (status == Loader.Ready) {
                 item.gsStyle = topItem.gsStyle;
+                item.sendMessage.connect(sendMessageRecieved);
             }
         }
     }
@@ -109,5 +124,10 @@ Item {
     Component.onCompleted: {
         msgHeader.source = topItem.gsStyle.msgHeaderPath;
         msgEdit.source = topItem.gsStyle.msgEditPath;
+    }
+
+    function sendMessageRecieved(text) { // вызвать сигнал отправки сообщения
+        addNotSendedMessage(text);
+        topItem.sendMessage(text);
     }
 }

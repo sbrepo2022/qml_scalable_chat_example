@@ -5,6 +5,7 @@ import QtGraphicalEffects 1.12
 
 Item {
     id: topItem
+    signal sendMessage(string text)
     property alias text: msgEdit.text
     property GSChatStyle gsStyle: GSChatStyle {}
 
@@ -71,7 +72,9 @@ Item {
                 MouseArea {
                     anchors.fill: parent
                     onClicked: {
-
+                        if (msgEdit.text !== "" || msgEdit.preeditText !== "")
+                            topItem.sendMessage(msgEdit.text + msgEdit.preeditText);
+                        msgEdit.clear();
                     }
                 }
             }

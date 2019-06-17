@@ -1,5 +1,5 @@
 import QtQuick 2.0
-import QtQuick.Window 2.11
+import QtQuick.Window 2.12
 
 Item {
     function mp(x) {

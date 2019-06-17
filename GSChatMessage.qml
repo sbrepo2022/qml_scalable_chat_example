@@ -7,7 +7,7 @@ Item {
     property string message
     property string time
     property int maxWidth
-    property int msgAlign
+    property bool msgAlign
     height: childrenRect.height
 
     FastShadow {

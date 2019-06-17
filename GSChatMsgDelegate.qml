@@ -7,7 +7,7 @@ Item {
     property GSChatStyle gsStyle: GSChatStyle {}
 
     id: topItem
-    property int msgAlign
+    property bool msgAlign
     property bool hideSender
     property string sender
     property string message
@@ -26,7 +26,7 @@ Item {
             anchors.leftMargin: topItem.msgAlign ? topItem.gsStyle.padding : 0
             anchors.right : topItem.msgAlign ? undefined : parent.right
             anchors.rightMargin: topItem.msgAlign ? 0 : topItem.gsStyle.padding
-            visible: ! topItem.hideSender
+            visible: (! topItem.hideSender) && msgAlign
         }
         GSChatMessage {
             id: chatMsg
