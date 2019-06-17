@@ -5,5 +5,11 @@
         <file>GSChatMsgDelegate.qml</file>
         <file>GSChatMessage.qml</file>
         <file>GSChatStyle.qml</file>
+        <file>GSChatMessageEdit.qml</file>
+        <file>FastShadow.qml</file>
+        <file>textures/round-send-24px.svg</file>
+        <file>fonts/Montserrat-Regular.ttf</file>
+        <file>GSChatMessageHeader.qml</file>
+        <file>textures/round-send-24px-dark_theme.svg</file>
     </qresource>
 </RCC>
