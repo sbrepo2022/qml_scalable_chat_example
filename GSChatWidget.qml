@@ -1,48 +1,62 @@
 import QtQuick 2.11
 import QtQuick.Window 2.11
 import QtQuick.Controls 2.4
+import QtGraphicalEffects 1.12
 
 Item {
-    GSChatStyle {
-        id: gsStyle
-    }
+    property GSChatStyle gsStyle: GSChatStyle {}
 
     id: topItem
 
     ListModel {
         id: msgModel
         ListElement {
-            l_style: 1
+            l_msgAlign: 1
+            l_hideSender: 0
             l_sender: "GEOSAS inc."
             l_message: "Welcome to GEOSAS chat!"
             l_time: "16:18"
         }
         ListElement {
-            l_style: 0
+            l_msgAlign: 0
+            l_hideSender: 0
             l_sender: "Sergey"
             l_message: "Hello world!"
             l_time: "16:18"
         }
         ListElement {
-            l_style: 1
+            l_msgAlign: 1
+            l_hideSender: 0
             l_sender: "GEOSAS inc."
-            l_message: "Welcome to GEOSAS chat! There is some text"
+            l_message: "Welcome to GEOSAS chat! There is some long text? Yes, there is some long text!"
             l_time: "16:18"
         }
         ListElement {
-            l_style: 0
+            l_msgAlign: 0
+            l_hideSender: 0
             l_sender: "Sergey"
             l_message: "Sample"
             l_time: "16:18"
         }
+
+        ListElement {
+            l_msgAlign: 0
+            l_hideSender: 1
+            l_sender: "Sergey"
+            l_message: "Site Qt: <a href=\"http://qt-project.org\">Qt Project website</a>"
+            l_time: "16:18"
+        }
     }
+
     ScrollView {
         anchors.fill: parent
         ListView {
             id: msgView
             model: msgModel
             delegate: GSChatMsgDelegate {
-                style: l_style
+                gsStyle: topItem.gsStyle
+                msgAlign: l_msgAlign
+                hideSender: l_hideSender
                 sender: l_sender
                 message: l_message
                 time: l_time
@@ -53,8 +67,47 @@ Item {
             anchors.bottom: parent.bottom
             anchors.left: parent.left
             anchors.right: parent.right
-            anchors.margins: gsStyle.padding
-            spacing: gsStyle.padding * 2
+            anchors.margins: topItem.gsStyle.padding
+            spacing: topItem.gsStyle.padding / 2
+            displayMarginBeginning: topItem.gsStyle.padding
+            displayMarginEnd: topItem.gsStyle.padding * 2
+
+            header: Item {
+                height: msgHeader.height
+            }
+
+            footer: Item {
+                height: msgEdit.height
+            }
         }
+    }
+
+    Loader {
+        id: msgHeader
+        anchors.top: parent.top
+        anchors.left: parent.left
+        anchors.right: parent.right
+        onStatusChanged: {
+            if (status == Loader.Ready) {
+                item.gsStyle = topItem.gsStyle;
+            }
+        }
+    }
+
+    Loader {
+        id: msgEdit
+        anchors.bottom: parent.bottom
+        anchors.left: parent.left
+        anchors.right: parent.right
+        onStatusChanged: {
+            if (status == Loader.Ready) {
+                item.gsStyle = topItem.gsStyle;
+            }
+        }
+    }
+
+    Component.onCompleted: {
+        msgHeader.source = topItem.gsStyle.msgHeaderPath;
+        msgEdit.source = topItem.gsStyle.msgEditPath;
     }
 }
