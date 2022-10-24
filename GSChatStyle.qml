@@ -26,9 +26,9 @@ Item {
     property color secondTextColor: "#30a030"   // text subcolor 1
     property color thirdTextColor: "#80d080"    // text subcolor 2
 
-    property int h1FontSize: 10 * fontScale
-    property int h2FontSize: 10 * fontScale
-    property int fontSize: 10 * fontScale
+    property int h1FontSize: mp(4) * fontScale
+    property int h2FontSize: mp(4) * fontScale
+    property int fontSize: mp(4) * fontScale
     property string fontFamily: "Montserrat"
 
     property double shadowSize1: mp(6) * sizeScale

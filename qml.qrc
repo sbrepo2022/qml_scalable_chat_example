@@ -11,5 +11,6 @@
         <file>fonts/Montserrat-Regular.ttf</file>
         <file>GSChatMessageHeader.qml</file>
         <file>textures/round-send-24px-dark_theme.svg</file>
+        <file>GSChatFunctions.js</file>
     </qresource>
 </RCC>

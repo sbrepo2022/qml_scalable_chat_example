@@ -2,6 +2,7 @@ import QtQuick 2.11
 import QtQuick.Window 2.11
 import QtQuick.Controls 2.4
 import QtGraphicalEffects 1.12
+import "GSChatFunctions.js" as GSCFunct
 
 Item {
     property GSChatStyle gsStyle: GSChatStyle {}
@@ -10,8 +11,18 @@ Item {
     id: topItem
 
     property int notSendMsg: 0
+    function appendMsgToList(newMsg) {
+        newMsg.l_message =  GSCFunct.replaceStringURI(newMsg.l_message);
+        msgModel.append(newMsg);
+    }
+
     function addNotSendedMessage(message) { // добавить сообщение в качестве неотправленных
-        msgModel.append({"l_msgAlign": false, "l_hideSender": true, "l_sender": "", "l_message": message, "l_time": "16:18"}); // устонавливать текущее время
+        var currDate = new Date();
+        var hours = currDate.getHours();
+        var minutes = currDate.getMinutes();
+        var resultTime = "";
+        resultTime = resultTime + (hours < 10 ? "0" : "") + hours + ":" + (minutes < 10 ? "0" : "") + minutes;
+        appendMsgToList({"l_msgAlign": false, "l_hideSender": true, "l_sender": "", "l_message": message, "l_time": resultTime}); // устанавливать текущее время
         notSendMsg += 1;
     }
 
@@ -45,7 +56,6 @@ Item {
             l_message: "Sample"
             l_time: "16:18"
         }
-
         ListElement {
             l_msgAlign: false
             l_hideSender: true
@@ -103,7 +113,7 @@ Item {
         anchors.right: parent.right
         onStatusChanged: {
             if (status == Loader.Ready) {
-                item.gsStyle = topItem.gsStyle;
+                item.gsStyle = Qt.binding(function() {return topItem.gsStyle});
             }
         }
     }
@@ -115,7 +125,7 @@ Item {
         anchors.right: parent.right
         onStatusChanged: {
             if (status == Loader.Ready) {
-                item.gsStyle = topItem.gsStyle;
+                item.gsStyle = Qt.binding(function() {return topItem.gsStyle});
                 item.sendMessage.connect(sendMessageRecieved);
             }
         }

@@ -19,7 +19,7 @@ Item {
         spacing: topItem.gsStyle.padding / 2
         Text {
             text: topItem.sender
-            font.pointSize: topItem.gsStyle.h2FontSize
+            font.pixelSize: topItem.gsStyle.h2FontSize
             font.family: topItem.gsStyle.fontFamily
             color: topItem.gsStyle.secondTextColor
             anchors.left: topItem.msgAlign ? parent.left : undefined

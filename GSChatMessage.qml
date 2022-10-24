@@ -32,7 +32,7 @@ Item {
             y: topItem.gsStyle.padding
             width: topItem.maxWidth - 3 * topItem.gsStyle.padding - timeText.width
             text: topItem.message
-            font.pointSize: topItem.gsStyle.fontSize
+            font.pixelSize: topItem.gsStyle.fontSize
             font.family: topItem.gsStyle.fontFamily
             color: topItem.msgAlign ? topItem.gsStyle.msgTextColor1 : topItem.gsStyle.msgTextColor2
             linkColor: topItem.msgAlign ? topItem.gsStyle.msgTextColor1 : topItem.gsStyle.msgTextColor2
@@ -46,7 +46,7 @@ Item {
     Text {
         id: timeText
         text: topItem.time
-        font.pointSize: topItem.gsStyle.fontSize
+        font.pixelSize: topItem.gsStyle.fontSize
         font.family: topItem.gsStyle.fontFamily
         color: topItem.gsStyle.thirdTextColor
         anchors.left: topItem.msgAlign ? msgSurface.right : undefined

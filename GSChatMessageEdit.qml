@@ -43,7 +43,7 @@ Item {
                 anchors.rightMargin: topItem.gsStyle.padding
                 clip: true
                 selectByMouse: true
-                font.pointSize: topItem.gsStyle.fontSize
+                font.pixelSize: topItem.gsStyle.fontSize
                 font.family: topItem.gsStyle.fontFamily
                 color: topItem.gsStyle.mainTextColor
                 placeholderText: "Напишите сообщение..."
@@ -72,9 +72,11 @@ Item {
                 MouseArea {
                     anchors.fill: parent
                     onClicked: {
-                        if (msgEdit.text !== "" || msgEdit.preeditText !== "")
-                            topItem.sendMessage(msgEdit.text + msgEdit.preeditText);
-                        msgEdit.clear();
+                        if (msgEdit.text !== "" || msgEdit.preeditText !== "") {
+                            var resultText = msgEdit.text + msgEdit.preeditText;
+                            topItem.sendMessage(resultText);
+                            msgEdit.clear();
+                        }
                     }
                 }
             }
